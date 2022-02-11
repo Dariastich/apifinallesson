@@ -14,6 +14,8 @@ def load_map(object):
     map_api_server = "http://static-maps.yandex.ru/1.x/"
     response = requests.get(map_api_server, params=map_params)
 
+
+
     if not response:
         print("Ошибка")
         sys.exit(1)
@@ -39,8 +41,16 @@ class MapObject():
         def update(self, event):
             if event.key == pygame.K_PAGEUP and self.zoom < 20:
                 self.zoom += 1
-            if event.key == pygame.K_PAGEDOWN and self.zoom > 2:
+            elif event.key == pygame.K_PAGEDOWN and self.zoom > 2:
                 self.zoom -= 1
+            elif event.key == pygame.K_LEFT:
+                self.lon -= LON_STEP * (2 ** (15 - self.zoom))
+            elif event.key == pygame.K_RIGHT:
+                self.lon += LON_STEP * (2 ** (15 - self.zoom))
+            elif event.key == pygame.K_UP:
+                self.lat -= LAT_STEP * (2 ** (15 - self.zoom))
+            elif event.key == pygame.K_DOWN:
+                self.lat += LAT_STEP * (2 ** (15 - self.zoom))
 
     [19: 43]
     if event.type == pygame.KEYUP:
