@@ -36,6 +36,16 @@ class MapObject():
     def ll(self):
         return str(sellf.lon) + ',' + str(self.lat)
 
+        def update(self, event):
+            if event.key == pygame.K_PAGEUP and self.zoom < 20:
+                self.zoom += 1
+            if event.key == pygame.K_PAGEDOWN and self.zoom > 2:
+                self.zoom -= 1
+
+    [19: 43]
+    if event.type == pygame.KEYUP:
+        map.update(event)
+
 pygame.init()
 screen = pygame.dsplay.set_mode((600, 450))
 
