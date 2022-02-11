@@ -47,14 +47,15 @@ class MapObject():
                 self.lon -= LON_STEP * (2 ** (15 - self.zoom))
             elif event.key == pygame.K_RIGHT:
                 self.lon += LON_STEP * (2 ** (15 - self.zoom))
-            elif event.key == pygame.K_UP:
-                self.lat -= LAT_STEP * (2 ** (15 - self.zoom))
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_UP and self.lat < 70:
                 self.lat += LAT_STEP * (2 ** (15 - self.zoom))
+            elif event.key == pygame.K_DOWN and self.lat > -65:
+                self.lat -= LAT_STEP * (2 ** (15 - self.zoom))
 
-    [19: 43]
-    if event.type == pygame.KEYUP:
-        map.update(event)
+            if self.lon > 180:
+                self.lon = self.lon - 360
+            if self.lon < -180:
+                self.lon = self.lon + 360
 
 pygame.init()
 screen = pygame.dsplay.set_mode((600, 450))
